@@ -19,7 +19,7 @@ func TestNewDriver(t *testing.T) {
 
 	assert.Nil(t, d.Del("test"))
 
-	ok, err = d.Has("test")
+	_, ok, err = d.Get("test")
 	assert.Nil(t, err)
 	assert.False(t, ok)
 
@@ -29,7 +29,7 @@ func TestNewDriver(t *testing.T) {
 		assert.Nil(t, rcd.gc(c, time.Now().Add(time.Second*2).Unix()))
 		return nil, nil
 	})
-	ok, err = d.Has("test2")
+	_, ok, err = d.Get("test2")
 	assert.Nil(t, err)
 	assert.False(t, ok)
 }

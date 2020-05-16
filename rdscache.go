@@ -69,11 +69,6 @@ func (rcd rdsCacheDriver) Del(key string) error {
 	return err
 }
 
-func (rcd rdsCacheDriver) Has(key string) (bool, error) {
-	_, ok, err := rcd.Get(key)
-	return ok, err
-}
-
 func (rcd rdsCacheDriver) gc(c redis.Conn, max int64) error {
 	var err error
 	var key []string
