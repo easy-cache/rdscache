@@ -32,6 +32,9 @@ func (rcd rdsCacheDriver) Get(key string) ([]byte, bool, error) {
 	var item cache.Item
 	err = json.Unmarshal(bts, &item)
 	val, ok := item.GetValue()
+	if ok == false {
+		_ = rcd.Del(key)
+	}
 	return val, ok, err
 }
 
