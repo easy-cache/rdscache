@@ -5,6 +5,8 @@ github.com/deckarep/golang-set v1.7.1/go.mod h1:93vsz/8Wt4joVM7c2AVqh+YRMiUSc14y
 github.com/easy-cache/cache v0.0.0-20200417031927-ca39ccc9bf84/go.mod h1:U9jVg0zTRYlxBqdwlG1HaZV0TcxG7Hw3Yf4QSGvhhUo=
 github.com/easy-cache/cache v0.0.0-20200516035056-6d788d2ff158 h1:8OYf6DrwkOkihz2ZXytNQSeKMMOjvAD3PHQ4eBUonRs=
 github.com/easy-cache/cache v0.0.0-20200516035056-6d788d2ff158/go.mod h1:H2eT1hRRUknJuMHVNn6PjH3ecupZTK1wN1/koGEamUs=
+github.com/easy-cache/cache v0.0.0-20200520023314-97a12c60426a h1:BBmCmdd3k4tpCQpuT9jiTh8vyvGFazJpG1f/ZOfk0ps=
+github.com/easy-cache/cache v0.0.0-20200520023314-97a12c60426a/go.mod h1:H2eT1hRRUknJuMHVNn6PjH3ecupZTK1wN1/koGEamUs=
 github.com/gomodule/redigo v2.0.0+incompatible h1:K/R+8tc58AaqLkqG2Ol3Qk+DR/TlNuhuh457pBFPtt0=
 github.com/gomodule/redigo v2.0.0+incompatible/go.mod h1:B4C85qUVwatsJoIUNIfCRsp7qO0iAmpGFZ4EELWSbC4=
 github.com/kr/pretty v0.1.0/go.mod h1:dAy3ld7l9f0ibDNOQOHHMYYIIbhfbHSm3C4ZsoJORNo=
