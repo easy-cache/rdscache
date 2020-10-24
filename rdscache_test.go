@@ -4,7 +4,6 @@ import (
 	"testing"
 	"time"
 
-	"github.com/gomodule/redigo/redis"
 	"github.com/letsfire/redigo/v2/mode/alone"
 	"github.com/stretchr/testify/assert"
 )
@@ -25,10 +24,7 @@ func TestNewDriver(t *testing.T) {
 
 	_ = d.Set("test2", []byte("123"), time.Second)
 	rcd := d.(rdsCacheDriver)
-	_, _ = rcd.client.Execute(func(c redis.Conn) (interface{}, error) {
-		assert.Nil(t, rcd.gc(c, time.Now().Add(time.Second*2).Unix()))
-		return nil, nil
-	})
+	assert.Nil(t, rcd.gc(time.Now().Add(time.Second*2).Unix()))
 	_, ok, err = d.Get("test2")
 	assert.Nil(t, err)
 	assert.False(t, ok)
