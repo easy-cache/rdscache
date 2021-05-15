@@ -9,7 +9,6 @@ import (
 	"github.com/easy-cache/cache"
 	"github.com/gomodule/redigo/redis"
 	"github.com/letsfire/redigo/v2"
-	"github.com/letsfire/utils"
 )
 
 type rdsCacheDriver struct {
@@ -42,7 +41,7 @@ func (rcd rdsCacheDriver) Set(key string, val []byte, ttl time.Duration) error {
 	_, err := rcd.client.
 		Execute(func(c redis.Conn) (interface{}, error) {
 			bts, err := json.Marshal(cache.NewItem(val, ttl))
-			return nil, utils.ExecWhenNoErr(err,
+			return nil, execWhenNoErr(err,
 				func() error {
 					score := time.Now().Add(ttl).Unix()
 					_, err = c.Do("ZADD", rcd.setName, score, key)
@@ -69,7 +68,7 @@ func (rcd rdsCacheDriver) gc(max int64) error {
 	_, err := rcd.client.
 		Execute(func(c redis.Conn) (interface{}, error) {
 			key, err := redis.Strings(c.Do("ZRANGEBYSCORE", rcd.setName, 0, max))
-			return nil, utils.ExecWhenNoErr(err,
+			return nil, execWhenNoErr(err,
 				func() error {
 					args := make([]interface{}, len(key)+1)
 					args[0] = rcd.hashMap
@@ -94,4 +93,16 @@ func NewDriver(hashMap string, client *redigo.Client) cache.DriverInterface {
 
 func NewCache(hashMap string, client *redigo.Client, args ...interface{}) cache.Interface {
 	return cache.New(append(args, NewDriver(hashMap, client))...)
+}
+
+func execWhenNoErr(err error, fns ...func() error) error {
+	if err != nil {
+		return err
+	}
+	for _, fn := range fns {
+		if err := fn(); err != nil {
+			return err
+		}
+	}
+	return nil
 }
